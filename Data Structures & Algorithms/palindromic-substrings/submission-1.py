@@ -1,0 +1,19 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        res = 0 
+        n = len(s)
+        for i in range(n):
+            l = r = i
+            res += self.countPali(s, l, r)
+            r = i+1
+            res += self.countPali(s, l, r)
+        return res
+
+    def countPali(self, s, l, r):
+        res = 0  
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            res += 1
+            l -= 1
+            r += 1
+        return res
+            
