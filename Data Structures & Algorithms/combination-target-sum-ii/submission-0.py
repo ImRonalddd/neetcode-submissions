@@ -1,0 +1,19 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        res: list[list[int]] = []
+
+        def BT(start:int, remaining:int, path: list[int]) -> None:
+            if remaining == 0:
+                res.append(path[:])
+                return
+            for i in range(start, len(candidates)):
+                if i > start and candidates[i] == candidates[i-1]:
+                    continue
+                if candidates[i] > remaining:
+                    break    
+                
+
+                BT(i+1, remaining-candidates[i], path + [candidates[i]])
+        BT(0, target, [])
+        return res
